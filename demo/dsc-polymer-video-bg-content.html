@@ -1,0 +1,40 @@
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../dsc-polymer-video-bg.html">
+
+<dom-module id="dsc-polymer-video-bg-content">
+  <template>
+    <style>
+    .example-content {
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      height: 100%;
+    }
+
+    h1 {
+      text-align: center;
+      color: rgba(255,255,255,.9);
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      font-size: 100px;
+      color: rgba(255,255,255,.9);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-transform: uppercase;
+    }
+    </style>
+
+    <dsc-polymer-video-bg srcs='["videos/video.mp4", "videos/video.webm", "videos/video.ogv"]' muted='muted' background="images/background.png">
+      <div class="example-content">
+        <h1>Background video</h1>
+      </div>
+    </dsc-polymer-video-bg>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'dsc-polymer-video-bg-content',
+    });
+  </script>
+</dom-module>

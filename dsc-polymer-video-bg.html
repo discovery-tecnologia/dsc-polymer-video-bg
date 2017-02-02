@@ -1,0 +1,133 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="dsc-polymer-video-bg">
+
+  <template>
+
+    <style>
+      :host {
+        position: relative;
+        height: 700px;
+        overflow: hidden;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        @apply(--dsc-polymer-video-bg);
+      }
+
+      .container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        @apply(--dsc-polymer-video-bg-content);
+      }
+
+      video {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: -100;
+        background-image: var(--background, none);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .overlay {
+        background: rgba(0, 0, 0, .8);
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        top: 0;
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -5;
+        @apply(--dsc-polymer-video-bg-overlay);
+      }
+    </style>
+
+    <div class="container">
+      <content id="content"></content>
+    </div>
+    <video autoplay loop muted={{muted}} id="video-bg">
+      <template  is="dom-repeat" items="[[srcs]]" as="src">
+        <source class="source" src=[[src]] type="[[getType(src)]]">
+      </template>
+      <p>Your browser does not support the video tag.</p>
+    </video>
+    <div class="overlay"></div>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'dsc-polymer-video-bg',
+
+      properties: {
+
+        /**
+         * Array of source files.
+         */
+        srcs: {
+          type: Array,
+          value: []
+        },
+
+        /**
+         * Mute sound.
+         */
+        muted: {
+          type: String,
+        },
+
+      },
+
+      /**
+       * Get video type by file extension.
+       *
+       * @param {string} e Video source file.
+       *
+       * @return {string} Type of source;
+       */
+      getType: function(src) {
+        var type = '';
+        var ext = src.substr(src.lastIndexOf('.') + 1);
+        console.log(ext);
+        switch (ext) {
+          case 'mp4':
+            type = 'video/mp4';
+            break;
+          case 'webm':
+            type = 'video/webm';
+            break;
+          case 'ogg':
+          case 'ogv':
+            type = 'video/ogg';
+        }
+        console.log(type);
+        return type;
+      },
+
+      /**
+       * On component ready.
+       */
+      ready: function() {
+        // Set background image if exists
+        var srcImg = this.getAttribute('background');
+        if (srcImg != 'undefined') {
+          this.customStyle['--background'] = 'url(' + srcImg + ')';
+          Polymer.updateStyles();
+        }
+      },
+    });
+  </script>
+
+</dom-module>
