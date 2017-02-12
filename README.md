@@ -1,6 +1,7 @@
 # &#60;dsc-polymer-video-bg&#62;
 
 [![Build Status](https://travis-ci.org/discovery-tecnologia/dsc-polymer-video-bg.svg?branch=master)](http://travis-ci.org/#!/discovery-tecnologia/dsc-polymer-video-bg)
+[![npm](https://img.shields.io/npm/l/express.svg)]()
 
 Allows you to set videos as background in HTML.
 
